@@ -1,0 +1,30 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "A portfolio page",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch src/assets/sass/main.scss:src/assets/css/main.css",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm run sass\" \"npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stkterry/portfolio.git"
+  },
+  "keywords": [
+    "portfolio"
+  ],
+  "author": "Steven Terry, stkterry",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stkterry/portfolio/issues"
+  },
+  "homepage": "https://github.com/stkterry/portfolio#readme",
+  "devDependencies": {
+    "concurrently": "^4.1.1",
+    "node-sass": "^4.12.0",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.6"
+  }
+}
