@@ -609,11 +609,11 @@
 			}
 		}
 
-		&.dev {
-			&:before {
-				// font-family: 'Devicons';
-			}
-		}
+		// &.dev {
+		// 	&:before {
+		// 		// font-family: 'Devicons';
+		// 	}
+		// }
 
 		&.style1 { &:before { color: _palette(accent1); } }
 		&.style2 { &:before { color: _palette(accent2); } }

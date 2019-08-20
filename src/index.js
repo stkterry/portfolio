@@ -1,5 +1,3 @@
-require("./app/js/main");
-
 import Looper from "./app/canvas/looper.js";
 import Undulate from "./app/canvas/undulate.js";
 

@@ -422,37 +422,6 @@ function map(val, oMin, oMax, nMin, nMax) {
 
 /***/ }),
 
-/***/ "./src/app/js/main.js":
-/*!****************************!*\
-  !*** ./src/app/js/main.js ***!
-  \****************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-(function ($) {
-  var $window = $(window),
-      $body = $('body'); // Breakpoints.
-
-  breakpoints({
-    xlarge: ['1141px', '1680px'],
-    large: ['981px', '1140px'],
-    medium: ['737px', '980px'],
-    small: ['481px', '736px'],
-    xsmall: ['321px', '480px'],
-    xxsmall: [null, '320px']
-  }); // Play initial animations on page load.
-
-  $window.on('load', function () {
-    window.setTimeout(function () {
-      $body.removeClass('is-preload');
-    }, 100);
-  }); // Scrolly.
-
-  $('.scrolly').scrolly();
-})(jQuery);
-
-/***/ }),
-
 /***/ "./src/app/noise/cperlin.js":
 /*!**********************************!*\
   !*** ./src/app/noise/cperlin.js ***!
@@ -1526,8 +1495,6 @@ function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_canvas_looper_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app/canvas/looper.js */ "./src/app/canvas/looper.js");
 /* harmony import */ var _app_canvas_undulate_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app/canvas/undulate.js */ "./src/app/canvas/undulate.js");
-__webpack_require__(/*! ./app/js/main */ "./src/app/js/main.js");
-
 
 
 
