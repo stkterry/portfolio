@@ -9,8 +9,8 @@
 		<title>Steven Terry | Portfolio</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="src/assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="src/assets/css/noscript.css" /></noscript>
+		<link rel="stylesheet" href="../src/assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../src/assets/css/noscript.css" /></noscript>
 		<link rel="stylesheet"
 			href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
 		
@@ -19,8 +19,8 @@
 
 		<!-- Header -->
 			<section id="header">
+				<canvas id="header-canvas"></canvas>
 				<div class="inner">
-					<!-- <span class="icon solid major fa-cloud"></span> -->
 					<!-- <img src="src/assets/images/pme.png" alt="portfolio pic"/> -->
 					<h1><strong>Steven Terry</strong><br />
 					Software Engineer</h1>
@@ -57,7 +57,7 @@
 						</p>
 						</div>
 						<div class="col-6 col-12-medium imp-medium">
-							<span class="image fit"><img src="src/assets/images/pme.png" alt="portfolio pic" /></span>
+							<span class="image fit"><img src="../src/assets/images/pme.png" alt="portfolio pic" /></span>
 						</div>
 					</div>
 				</div>
@@ -488,26 +488,37 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 		<!-- Footer -->
 			<section id="footer">
-				<h1>Get In Touch!</h1>
-				<a href="https://drive.google.com/file/d/1hyaMg5FNaNiC01y0ftZNA36e63UsUQ0w/view?usp=sharing" class="button">Resume</a>
-				<h2>stkterry@gmail.com</h2>
+				<div class="inner">
+					<!-- <span class="icon solid major fa-cloud"></span> -->
+					<!-- <img src="src/assets/images/pme.png" alt="portfolio pic"/> -->
+					<h1>Get In Touch!</h1>
+					<a href="https://drive.google.com/file/d/1hyaMg5FNaNiC01y0ftZNA36e63UsUQ0w/view?usp=sharing" class="button">Resume</a>
+					<h3 class="info">stkterry@gmail.com</h3>
+					<h3 class="info">229-256-4474</h3>
+				</div>
+				
 				<ul class="icons">
 					<li><a href="https://github.com/stkterry" class="icon devicon-github-plain"><span class="label">GitHub</span></a></li>
 					<li><a href="https://www.linkedin.com/in/steven-terry-59977999/" class="icon fab fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
 					<li><a href="https://angel.co/stkterry" class="icon fab fa-angellist"><span class="label">AngelList</span></a></li>
 				</ul>
-				<ul class="copyright">
-					<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-				</ul>
+
+				<details class="copyright">
+					<summary>Copyright</summary>
+					<ul>
+						<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</details>
 			</section>
 
 		<!-- Scripts -->
-			<script src="src/app/js/jquery.min.js"></script>
-			<script src="src/app/js/jquery.scrolly.min.js"></script>
-			<script src="src/app/js/browser.min.js"></script>
-			<script src="src/app/js/breakpoints.min.js"></script>
-			<script src="src/app/js/util.js"></script>
-			<script src="src/app/js/main.js"></script>
+			<script src="../src/app/js/jquery.min.js"></script>
+			<script src="../src/app/js/jquery.scrolly.min.js"></script>
+			<script src="../src/app/js/browser.min.js"></script>
+			<script src="../src/app/js/breakpoints.min.js"></script>
+			<script src="../src/app/js/util.js"></script>
+			<script src="../src/app/js/main.js"></script>
+			<script src="main.js"></script>
 
 	</body>
 </html>

@@ -4,6 +4,7 @@
 @import 'libs/vendor';
 @import 'libs/breakpoints';
 @import 'libs/html-grid';
+@import 'libs/canvas';
 @import url('fontawesome-all.min.css');
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic");
 
@@ -1115,7 +1116,7 @@
 		&.style2 {
 			@include dark(#333);
 			background-attachment:	fixed,							fixed;
-			background-image:		url('images/overlay1.png'),		url('../../images/header.jpg');
+			background-image:		url('images/overlay1.png'),		url('../images/header.jpg');
 			background-size:		auto,							cover;
 		}
 	}
@@ -1125,13 +1126,18 @@
 	#header {
 		@include padding(9em, 0, (0,0,_size(element-margin),0));
 		@include dark(#4686a0);
-		background-attachment:	fixed,							fixed,							fixed;
-		background-image:		url('images/overlay2.png'),		url('images/overlay3.svg'),		linear-gradient(45deg, _palette(accent1-alt) 5%, _palette(accent3-alt) 30%, _palette(accent6-alt));
-		background-position:	top left,						center center,					center center;
-		background-size:		auto,							cover,							cover;
+		// background-attachment:	fixed,							fixed,							fixed;
+		// background-image:		url('images/overlay2.png'),		url('images/overlay3.svg'),		linear-gradient(45deg, _palette(accent1-alt) 5%, _palette(accent3-alt) 30%, _palette(accent6-alt));
+		// background-position:	top left,						center center,					center center;
+		// background-size:		auto,							cover,							cover;
+		background: black;
 		overflow: hidden;
 		position: relative;
 		text-align: center;
+
+		h1, p {
+			text-shadow: 2px 2px black;
+		}
 
 		h1 {
 			margin: 0;
@@ -1154,6 +1160,7 @@
 			}
 
 			&:after {
+				
 				background: _palette(dark, border);
 				content: '';
 				height: 100vh;
@@ -1221,6 +1228,12 @@
 		background-position:	top left,						center center,					center center;
 		background-size:		auto,							cover,							cover;
 		text-align: center;
+
+		.info {
+			margin-top: 16px;
+			font-size: 1em;
+			font-weight: _font(weight-bold);
+		}
 
 		.icons {
 			margin: 0;
