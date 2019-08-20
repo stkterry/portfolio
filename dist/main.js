@@ -130,7 +130,8 @@ var c3 = {
 };
 var zoff = 0;
 var inc = 0.01;
-var zinc = 0.01;
+var xinc = 0.0025;
+var zinc = 0.005;
 var curDetail = 1;
 var displacement = 60;
 
@@ -141,9 +142,9 @@ function () {
     _classCallCheck(this, Looper);
 
     this.canvas = canvas;
-    this.ctx = canvas.getContext("2d"); // this.ctx.fillStyle = "black"
-    // this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-
+    this.ctx = canvas.getContext("2d");
+    this.ctx.fillStyle = "black";
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     this.noiseLoopX = new Array(Math.floor(TWO_PI / da));
     this.noiseLoopY = new Array(Math.floor(TWO_PI / da));
     this.frame();
@@ -229,12 +230,12 @@ function () {
       this.ctx.beginPath();
       var x = cper.noise(c.xoff) * this.canvas.width;
       var y = cper.noise(c.yoff) * this.canvas.height;
-      c.xoff += 0.005;
-      c.yoff += 0.005;
+      c.xoff += xinc;
+      c.yoff += xinc;
       this.ctx.strokeStyle = 'black';
       this.ctx.fillStyle = "black";
       this.ctx.shadowColor = "rgba(200, 0, 50, 1)";
-      this.ctx.shadowBlur = 10 + 25 * cper.noise(c.xoff);
+      this.ctx.shadowBlur = 25 * cper.noise(c.xoff);
       this.ctx.lineWidth = 1;
       this.ctx.arc(x, y, 4, 0, 2 * Math.PI);
       this.ctx.stroke();
@@ -247,12 +248,13 @@ function () {
       var angle = Math.atan2(-yDiff, -xDiff) + Math.PI;
       var angIdx = Math.floor(angle / da);
 
-      if (Math.random() > 0.9) {
-        this.ctx.strokeStyle = "rgba(255, 255, 255, .7)";
+      if (Math.random() > 0.95) {
+        this.ctx.lineWidth = 1.5;
+        this.ctx.strokeStyle = "white";
         this.ctx.shadowColor = "white";
+        this.ctx.shadowBlur = 5;
         this.ctx.beginPath();
         this.drawLightning(this.noiseLoopX[angIdx] + this.canvas.width / 2, this.noiseLoopY[angIdx] + this.canvas.height / 2, x, y, displacement);
-        this.ctx.lineWidth = 1.5;
         this.ctx.stroke();
         this.ctx.closePath();
       }
@@ -275,9 +277,10 @@ function () {
   }, {
     key: "clearScreen",
     value: function clearScreen() {
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // this.ctx.fillStyle = "rgb(20, 26, 34)"
-      // this.ctx.fillStyle = "black"
-      // this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      // this.ctx.fillStyle = "rgb(20, 26, 34)"
+      this.ctx.fillStyle = "black";
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
   }]);
 
@@ -290,6 +293,128 @@ function () {
 function oneMap(val, nMin, nMax) {
   return (nMax - nMin) * val + nMin;
 }
+
+function map(val, oMin, oMax, nMin, nMax) {
+  return (val - oMin) * (nMax - nMin) / (oMax - oMin) + nMin;
+}
+
+/***/ }),
+
+/***/ "./src/app/canvas/undulate.js":
+/*!************************************!*\
+  !*** ./src/app/canvas/undulate.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Undulate; });
+/* harmony import */ var _noise_open_simplex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../noise/open_simplex */ "./src/app/noise/open_simplex.js");
+/* harmony import */ var _noise_cperlin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../noise/cperlin */ "./src/app/noise/cperlin.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var oplex = new _noise_open_simplex__WEBPACK_IMPORTED_MODULE_0__["default"]();
+oplex.seed();
+var noise = oplex.noise3D.bind(oplex);
+var cper = new _noise_cperlin__WEBPACK_IMPORTED_MODULE_1__["default"]();
+cper.noiseDetail(4, 0.5);
+var TWO_PI = Math.PI * 2;
+var da = 0.01;
+var noiseMax = 20;
+var phase = 0;
+var dp = 0.001;
+var xoff = 0;
+var yoff = 0;
+var zoff = 0;
+var inc = 0.01;
+var xinc = 0.0025;
+var zinc = 0.005;
+var curDetail = 1;
+var displacement = 60;
+
+var Undulate =
+/*#__PURE__*/
+function () {
+  function Undulate(canvas) {
+    _classCallCheck(this, Undulate);
+
+    this.canvas = canvas;
+    this.ctx = canvas.getContext("2d"); // this.ctx.fillStyle = "white"
+
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.frame();
+  }
+
+  _createClass(Undulate, [{
+    key: "nextFrame",
+    value: function nextFrame() {
+      requestAnimationFrame(this.frame.bind(this));
+    }
+  }, {
+    key: "frame",
+    value: function frame() {
+      this.clearScreen();
+      this.drawU();
+      this.nextFrame();
+    }
+  }, {
+    key: "drawCircle",
+    value: function drawCircle(x, y) {
+      this.ctx.beginPath(); // this.ctx.strokeStyle = 'black';
+      // this.ctx.fillStyle = "black"
+      // this.ctx.shadowColor = "rgba(200, 0, 50, 1)"
+      // this.ctx.shadowBlur = 10 + 25 * cper.noise(c.xoff);
+
+      this.ctx.lineWidth = 1;
+      this.ctx.arc(x, y, 4, 0, 2 * Math.PI);
+      this.ctx.stroke();
+      this.ctx.fill();
+      this.ctx.closePath();
+    }
+  }, {
+    key: "drawU",
+    value: function drawU() {
+      var nRows = 50;
+      var nCols = Math.floor(this.canvas.width / this.canvas.height) * nRows; // let nCols = 40;
+
+      var w = this.canvas.width / nCols;
+      var h = this.canvas.height / nRows; // debugger;
+
+      for (var i = 0; i < nRows; i++) {
+        for (var j = 0; j < nCols; j++) {
+          // console.log(noise(w * i, j * j, zoff));
+          var amt = map(noise(i / 20, j / 20, zoff), -1, 1, 0, 1);
+          this.ctx.fillStyle = "rgb(".concat(200 * amt, ", ").concat(255 * amt, ", ").concat(255 * amt, ")"); // this.ctx.fillStyle = "green";
+          // this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
+
+          this.ctx.fillRect(Math.floor(j * w), Math.floor(i * h), Math.ceil(w), Math.ceil(h));
+        }
+      } // this.ctx.filter = "blur(4px)"
+
+
+      zoff += zinc;
+    }
+  }, {
+    key: "clearScreen",
+    value: function clearScreen() {// this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      // this.ctx.fillStyle = "rgb(20, 26, 34)"
+      // this.ctx.fillStyle = "white"
+      // this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+  }]);
+
+  return Undulate;
+}();
+
+
+;
 
 function map(val, oMin, oMax, nMin, nMax) {
   return (val - oMin) * (nMax - nMin) / (oMax - oMin) + nMin;
@@ -1400,7 +1525,9 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_canvas_looper_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app/canvas/looper.js */ "./src/app/canvas/looper.js");
+/* harmony import */ var _app_canvas_undulate_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app/canvas/undulate.js */ "./src/app/canvas/undulate.js");
 __webpack_require__(/*! ./app/js/main */ "./src/app/js/main.js");
+
 
 
 
@@ -1417,6 +1544,19 @@ window.addEventListener('DOMContentLoaded', function (event) {
     return resizeCanvas(header, canvas);
   });
   new _app_canvas_looper_js__WEBPACK_IMPORTED_MODULE_0__["default"](canvas);
+  var footer = document.getElementById("footer");
+  var canvasFooter = document.getElementById("header-canvas-foot");
+  resizeCanvas(footer, canvasFooter);
+  window.addEventListener('resize', function () {
+    return resizeCanvas(footer, canvasFooter);
+  });
+  new _app_canvas_looper_js__WEBPACK_IMPORTED_MODULE_0__["default"](canvasFooter);
+  var noiser = document.getElementById("noiser");
+  resizeCanvas(header, noiser);
+  window.addEventListener('resize', function () {
+    return resizeCanvas(header, noiser);
+  });
+  new _app_canvas_undulate_js__WEBPACK_IMPORTED_MODULE_1__["default"](noiser);
 });
 
 /***/ })

@@ -23,7 +23,8 @@ let c3 = { xoff: Math.random() * 1000, yoff: Math.random() * 1000 };
 
 let zoff = 0;
 let inc = 0.01;
-let zinc = 0.01;
+let xinc = 0.0025;
+let zinc = 0.005;
 
 const curDetail = 1;
 const displacement = 60;
@@ -33,8 +34,8 @@ export default class Looper {
   constructor(canvas) {
     this.canvas = canvas;
     this.ctx = canvas.getContext("2d");
-    // this.ctx.fillStyle = "black"
-    // this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.fillStyle = "black"
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     this.noiseLoopX = new Array(Math.floor(TWO_PI / da));
     this.noiseLoopY = new Array(Math.floor(TWO_PI / da));
     this.frame();
@@ -109,13 +110,13 @@ export default class Looper {
     this.ctx.beginPath()
     let x = cper.noise(c.xoff) * this.canvas.width;
     let y = cper.noise(c.yoff) * this.canvas.height;
-    c.xoff += 0.005;
-    c.yoff += 0.005;
+    c.xoff += xinc;
+    c.yoff += xinc;
 
     this.ctx.strokeStyle = 'black';
     this.ctx.fillStyle = "black"
     this.ctx.shadowColor = "rgba(200, 0, 50, 1)"
-    this.ctx.shadowBlur = 10 + 25 * cper.noise(c.xoff);
+    this.ctx.shadowBlur = 25 * cper.noise(c.xoff);
     this.ctx.lineWidth = 1;
     this.ctx.arc(x, y, 4, 0, 2 * Math.PI);
     this.ctx.stroke();
@@ -129,12 +130,13 @@ export default class Looper {
     let angle = Math.atan2(-yDiff, -xDiff) + Math.PI;
     let angIdx = Math.floor(angle / da);
     
-    if (Math.random() > 0.9) {
-      this.ctx.strokeStyle = "rgba(255, 255, 255, .7)";
+    if (Math.random() > 0.95) {
+      this.ctx.lineWidth = 1.5;
+      this.ctx.strokeStyle = "white";
       this.ctx.shadowColor = "white";
+      this.ctx.shadowBlur = 5;
       this.ctx.beginPath();
       this.drawLightning(this.noiseLoopX[angIdx] + this.canvas.width / 2, this.noiseLoopY[angIdx] + this.canvas.height / 2, x, y, displacement)
-      this.ctx.lineWidth = 1.5;
       this.ctx.stroke();
       this.ctx.closePath();
     }
@@ -157,10 +159,10 @@ export default class Looper {
 
 
   clearScreen() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     // this.ctx.fillStyle = "rgb(20, 26, 34)"
-    // this.ctx.fillStyle = "black"
-    // this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.fillStyle = "black"
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
 };
