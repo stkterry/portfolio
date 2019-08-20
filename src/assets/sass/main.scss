@@ -1,3 +1,4 @@
+@import 'libs/reset';
 @import 'libs/vars';
 @import 'libs/functions';
 @import 'libs/mixins';
@@ -7,6 +8,7 @@
 @import 'libs/canvas';
 @import url('fontawesome-all.min.css');
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic");
+// @import url
 
 /*
 	Photon by HTML5 UP
@@ -24,77 +26,6 @@
 		xsmall:   ( 321px,   480px  ),
 		xxsmall:  ( null,    320px  )
 	));
-
-// Reset.
-// Based on meyerweb.com/eric/tools/css/reset (v2.0 | 20110126 | License: public domain)
-
-	html, body, div, span, applet, object,
-	iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
-	pre, a, abbr, acronym, address, big, cite,
-	code, del, dfn, em, img, ins, kbd, q, s, samp,
-	small, strike, strong, sub, sup, tt, var, b,
-	u, i, center, dl, dt, dd, ol, ul, li, fieldset,
-	form, label, legend, table, caption, tbody,
-	tfoot, thead, tr, th, td, article, aside,
-	canvas, details, embed, figure, figcaption,
-	footer, header, hgroup, menu, nav, output, ruby,
-	section, summary, time, mark, audio, video {
-		margin: 0;
-		padding: 0;
-		border: 0;
-		font-size: 100%;
-		font: inherit;
-		vertical-align: baseline;
-	}
-
-	article, aside, details, figcaption, figure,
-	footer, header, hgroup, menu, nav, section {
-		display: block;
-	}
-
-	body {
-		line-height: 1;
-	}
-
-	ol, ul {
-		list-style:none;
-	}
-
-	blockquote,	q {
-		quotes: none;
-
-		&:before,
-		&:after {
-			content: '';
-			content: none;
-		}
-	}
-
-	table {
-		border-collapse: collapse;
-		border-spacing: 0;
-	}
-
-	body {
-		-webkit-text-size-adjust: none;
-	}
-
-	mark {
-		background-color: transparent;
-		color: inherit;
-	}
-
-	input::-moz-focus-inner {
-		border: 0;
-		padding: 0;
-	}
-
-	input, select, textarea {
-		-moz-appearance: none;
-		-webkit-appearance: none;
-		-ms-appearance: none;
-		appearance: none;
-	}
 
 /* Basic */
 
@@ -584,6 +515,8 @@
 
 /* Icon */
 
+
+
 	.icon {
 		@include icon;
 		border-bottom: none;
@@ -630,8 +563,8 @@
 			margin: 0 0 (_size(element-margin) * 0.75) 0;
 
 			&:before {
-				font-size: 2em;
-				line-height: 1em;
+				font-size: 4em;
+				line-height: 2em;
 			}
 		}
 	}
@@ -643,7 +576,7 @@
 		border: 0;
 		display: inline-block;
 		position: relative;
-
+		
 		img {
 			border-radius: _size(border-radius);
 			display: block;
@@ -674,8 +607,10 @@
 			display: block;
 			margin: 0 0 _size(element-margin) 0;
 			width: 100%;
-
+			// height: 100%;
+			// max-height: 225px;
 			img {
+				// vertical-align: middle;
 				width: 100%;
 			}
 		}
@@ -824,15 +759,15 @@
 		cursor: default;
 		list-style: none;
 		padding-left: 0;
-
+		
 		li {
 			display: inline-block;
 			padding: 0 1.25em 0 0;
-
+			
 			&:last-child {
 				padding-right: 0;
 			}
-
+			
 			.icon {
 				&:before {
 					font-size: 1.5em;
@@ -849,19 +784,20 @@
 
 		li {
 			display: inline-block;
-			padding: 2.5em;
+			padding: 1em;
 			text-align: center;
 
 			.icon {
 				@include vendor('transform', 'rotate(45deg)');
 				border-radius: _size(border-radius);
-				border: solid 1px _palette(border);
+				border: solid 0px _palette(border);
 				display: inline-block;
 				height: 4em;
 				line-height: 4em;
 				margin: 0;
 				text-align: center;
 				width: 4em;
+				text-shadow: 2px 2px rgba(0, 0, 0, 0.349);
 
 				&:before {
 					@include vendor('transform', 'rotate(-45deg)');
@@ -1092,6 +1028,7 @@
 			&.major-icons {
 				li {
 					.icon {
+						
 						border-color: _palette(dark, border);
 					}
 				}
@@ -1099,6 +1036,7 @@
 		}
 
 		.icon {
+			
 			&.major {
 				color: _palette(dark, fg-bold);
 			}
@@ -1116,10 +1054,10 @@
 		}
 
 		&.style2 {
-			@include dark(#333);
-			background: rgba(51, 51, 51, .8);
+			// @include dark(#333);
+			// background: rgba(51, 51, 51, .8);
 			// background-attachment:	fixed,							fixed;
-			// background-image:		url('images/overlay1.png'),		url('../images/header.jpg');
+			// background-image:		url('images/pme.png'),		url('../images/header.jpg');
 			// background-size:		auto,							cover;
 		}
 	}
@@ -1306,7 +1244,7 @@
 			ul {
 				&.major-icons {
 					li {
-						padding: 2em;
+						padding: 1em;
 
 						.icon {
 							height: 4em;
@@ -1430,7 +1368,7 @@
 			ul {
 				&.major-icons {
 					li {
-						padding: 1.5em;
+						padding: 0.3em;
 
 						.icon {
 							height: 5em;

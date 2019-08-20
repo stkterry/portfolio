@@ -3,7 +3,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.js',
   output: {
-    filename: 'main.js'
+    filename: 'main.js',
+    path: path.resolve(__dirname, '')
   },
   devtool: 'source-map',
   module: {
